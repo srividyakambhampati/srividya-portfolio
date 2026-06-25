@@ -18,6 +18,8 @@ import {
   Download,
   Menu,
   X,
+  Check,
+  Calendar,
 } from "lucide-react";
 
 
@@ -68,12 +70,6 @@ export default function Portfolio() {
 
   return (
     <div className="relative min-h-screen overflow-x-hidden">
-      {/* Animated background blobs */}
-      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-        <div className="absolute -top-32 -left-32 h-96 w-96 rounded-full bg-primary/20 blur-3xl animate-blob" />
-        <div className="absolute top-1/3 -right-32 h-[28rem] w-[28rem] rounded-full bg-accent/20 blur-3xl animate-blob [animation-delay:-6s]" />
-        <div className="absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-primary/15 blur-3xl animate-blob [animation-delay:-12s]" />
-      </div>
 
       <Nav active={active} scrolled={scrolled} />
 
@@ -120,14 +116,14 @@ function Nav({ active, scrolled }: { active: string; scrolled: boolean }) {
           <a
             href="#top"
             onClick={(e) => handleNav(e, "top")}
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 group/logo"
           >
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-[var(--gradient-primary)] text-sm font-bold text-primary-foreground shadow-[var(--shadow-glow)]">
+            <span className="grid h-9 w-9 place-items-center rounded-xl bg-primary-gradient text-sm font-bold text-primary-foreground shadow-[var(--shadow-glow)] transition-transform duration-300 group-hover/logo:scale-105">
               SK
             </span>
             <span className="hidden font-display text-sm font-semibold tracking-wide sm:block">
               <span className="gradient-text">Srividya</span>
-              <span className="text-muted-foreground"> Kambhampati</span>
+              <span className="text-muted-foreground transition-colors group-hover/logo:text-foreground"> Kambhampati</span>
             </span>
           </a>
 
@@ -137,14 +133,14 @@ function Nav({ active, scrolled }: { active: string; scrolled: boolean }) {
                 key={n.id}
                 href={`#${n.id}`}
                 onClick={(e) => handleNav(e, n.id)}
-                className={`relative rounded-full px-3 py-1.5 text-sm transition-colors ${
+                className={`relative rounded-full px-3 py-1.5 text-sm font-medium transition-all duration-300 ${
                   active === n.id
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground"
+                    ? "text-primary"
+                    : "text-muted-foreground hover:text-foreground hover:bg-black/[0.03]"
                 }`}
               >
                 {active === n.id && (
-                  <span className="absolute inset-0 -z-10 rounded-full bg-white/10" />
+                  <span className="absolute inset-0 -z-10 rounded-full bg-primary/10" />
                 )}
                 {n.label}
               </a>
@@ -154,7 +150,7 @@ function Nav({ active, scrolled }: { active: string; scrolled: boolean }) {
           <div className="flex items-center gap-2">
             <a
               href={`mailto:${SOCIALS.email}`}
-              className="group hidden sm:inline-flex items-center gap-1.5 rounded-full bg-[var(--gradient-primary)] px-4 py-2 text-sm font-medium text-primary-foreground transition-all hover:shadow-[var(--shadow-glow)]"
+              className="group hidden sm:inline-flex items-center gap-1.5 rounded-full bg-primary-gradient px-4 py-2 text-sm font-medium text-primary-foreground transition-all hover:shadow-[var(--shadow-glow)]"
             >
               Hire me
               <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -178,10 +174,10 @@ function Nav({ active, scrolled }: { active: string; scrolled: boolean }) {
                   key={n.id}
                   href={`#${n.id}`}
                   onClick={(e) => handleNav(e, n.id)}
-                  className={`rounded-xl px-4 py-3 text-sm transition-colors ${
+                  className={`rounded-xl px-4 py-3 text-sm font-medium transition-all ${
                     active === n.id
-                      ? "bg-white/10 text-foreground"
-                      : "text-muted-foreground hover:bg-white/5 hover:text-foreground"
+                      ? "bg-primary/10 text-primary"
+                      : "text-muted-foreground hover:bg-black/[0.03] hover:text-foreground"
                   }`}
                 >
                   {n.label}
@@ -189,7 +185,7 @@ function Nav({ active, scrolled }: { active: string; scrolled: boolean }) {
               ))}
               <a
                 href={`mailto:${SOCIALS.email}`}
-                className="mt-1 inline-flex items-center justify-center gap-1.5 rounded-xl bg-[var(--gradient-primary)] px-4 py-3 text-sm font-medium text-primary-foreground"
+                className="mt-1 inline-flex items-center justify-center gap-1.5 rounded-xl bg-primary-gradient px-4 py-3 text-sm font-medium text-primary-foreground"
               >
                 Hire me
                 <ArrowUpRight className="h-3.5 w-3.5" />
@@ -206,7 +202,7 @@ function Nav({ active, scrolled }: { active: string; scrolled: boolean }) {
 /* ------------------------------ HERO ------------------------------- */
 function Hero() {
   return (
-    <section id="top" className="relative flex min-h-screen flex-col justify-center pt-32 pb-20">
+    <section id="top" className="relative flex min-h-[85vh] flex-col justify-center pt-28 pb-14">
       <div className="grid items-center gap-12 lg:grid-cols-[1.4fr_1fr]">
         <div className="animate-fade-up">
           <div className="inline-flex items-center gap-2 rounded-full glass px-3 py-1.5 text-xs text-muted-foreground">
@@ -237,7 +233,7 @@ function Hero() {
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <a
               href="#projects"
-              className="group inline-flex items-center gap-2 rounded-full bg-[var(--gradient-primary)] px-5 py-3 text-sm font-medium text-primary-foreground transition-all hover:shadow-[var(--shadow-glow)]"
+              className="group inline-flex items-center gap-2.5 rounded-full bg-primary-gradient px-5.5 py-3 text-sm font-medium text-primary-foreground transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] hover:shadow-[var(--shadow-glow)]"
             >
               View my work
               <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -247,7 +243,7 @@ function Hero() {
               download="Srividya-Kambhampati-Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full glass px-5 py-3 text-sm font-medium transition-colors hover:bg-white/10"
+              className="inline-flex items-center gap-2.5 rounded-full glass px-5.5 py-3 text-sm font-medium transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] hover:bg-black/5"
             >
               <Download className="h-4 w-4" />
               Resume
@@ -273,8 +269,8 @@ function Hero() {
         </div>
 
         {/* Avatar / floating card */}
-        <div className="relative mx-auto mt-12 lg:mt-0">
-          <div className="relative h-96 w-96 sm:h-[30rem] sm:w-[30rem] animate-float">
+        <div className="relative mx-auto mt-8 lg:mt-0">
+          <div className="relative h-72 w-72 sm:h-96 sm:w-96 md:h-[28rem] md:w-[28rem] lg:h-[30rem] lg:w-[30rem] animate-float">
             <div className="absolute inset-0 rounded-full bg-[var(--gradient-primary)] blur-2xl opacity-40" />
             <div className="relative grid h-full w-full place-items-center rounded-[2rem] glass-strong p-2">
               <div className="h-full w-full overflow-hidden rounded-[1.7rem] bg-gradient-to-br from-primary/30 via-accent/20 to-transparent">
@@ -331,7 +327,7 @@ function SocialIcon({
       target="_blank"
       rel="noreferrer"
       aria-label={label}
-      className="grid h-10 w-10 place-items-center rounded-full glass transition-all hover:bg-white/10 hover:-translate-y-0.5"
+      className="grid h-10 w-10 place-items-center rounded-full glass transition-all hover:bg-black/5 hover:-translate-y-0.5"
     >
       {children}
     </a>
@@ -349,7 +345,7 @@ function SectionTitle({
   description?: string;
 }) {
   return (
-    <div className="mb-12 max-w-2xl">
+    <div className="mb-8 max-w-2xl">
       <div className="inline-flex items-center gap-2 rounded-full glass px-3 py-1 text-xs uppercase tracking-[0.18em] text-muted-foreground">
         <Sparkles className="h-3 w-3 text-primary" />
         {eyebrow}
@@ -379,7 +375,7 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} className="scroll-mt-24 py-24">
+    <section id={id} className="scroll-mt-20 py-14">
       {children}
     </section>
   );
@@ -390,22 +386,40 @@ function About() {
     <Section id="about">
       <SectionTitle eyebrow="About" title="A bit about me" />
       <div className="grid gap-6 lg:grid-cols-3">
-        <div className="glass rounded-3xl p-8 lg:col-span-2">
+        <div className="glass rounded-3xl p-6 sm:p-8 lg:col-span-2 border-l-4 border-l-primary relative overflow-hidden group hover:shadow-xl hover:border-primary/20 transition-all duration-300">
+          <div className="absolute top-0 right-0 h-32 w-32 rounded-full bg-primary-gradient opacity-0 blur-3xl transition-opacity group-hover:opacity-10 pointer-events-none" />
           <p className="text-lg leading-relaxed text-muted-foreground">
-            I'm a <span className="text-foreground">MERN Stack Developer</span> who loves
+            I'm a <span className="text-foreground font-semibold">MERN Stack Developer</span> who loves
             turning complex problems into intuitive digital products. My focus is on writing
             maintainable code, building delightful interfaces, and shipping reliable backend
             APIs that scale.
           </p>
-          <p className="mt-4 text-muted-foreground">
+          <p className="mt-4 text-muted-foreground leading-relaxed">
             Outside of code, I enjoy exploring new design trends, contributing to open source,
             and constantly leveling up my skills. I thrive in collaborative, fast-moving teams
             where craft and impact are valued equally.
           </p>
+
+          <div className="mt-8 grid gap-4 grid-cols-2 sm:grid-cols-3 border-t border-black/5 pt-6">
+            <div className="rounded-2xl bg-black/[0.02] p-4 transition-all hover:bg-black/[0.04]">
+              <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Specialization</div>
+              <div className="mt-1 text-sm font-bold text-foreground">MERN Stack</div>
+            </div>
+            <div className="rounded-2xl bg-black/[0.02] p-4 transition-all hover:bg-black/[0.04]">
+              <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Core Focus</div>
+              <div className="mt-1 text-sm font-bold text-foreground">Clean APIs & UX</div>
+            </div>
+            <div className="rounded-2xl bg-black/[0.02] p-4 transition-all hover:bg-black/[0.04] col-span-2 sm:col-span-1">
+              <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Availability</div>
+              <div className="mt-1 text-sm font-bold text-foreground">Full-time / Remote</div>
+            </div>
+          </div>
         </div>
-        <div className="glass rounded-3xl p-8">
-          <h3 className="font-display text-lg font-semibold">What I do best</h3>
-          <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
+
+        <div className="glass rounded-3xl p-6 sm:p-8 border-l-4 border-l-accent relative overflow-hidden group hover:shadow-xl hover:border-accent/20 transition-all duration-300">
+          <div className="absolute top-0 right-0 h-32 w-32 rounded-full bg-primary-gradient opacity-0 blur-3xl transition-opacity group-hover:opacity-10 pointer-events-none" />
+          <h3 className="font-display text-lg font-bold text-foreground group-hover:text-primary transition-colors">What I do best</h3>
+          <ul className="mt-6 space-y-4">
             {[
               "Full-stack web apps end to end",
               "REST APIs with Node & Express",
@@ -413,9 +427,11 @@ function About() {
               "MongoDB schema & query design",
               "Performance & accessibility",
             ].map((t) => (
-              <li key={t} className="flex items-start gap-2">
-                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--gradient-primary)]" />
-                {t}
+              <li key={t} className="flex items-start gap-3 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-lg bg-accent/15 text-accent">
+                  <Check className="h-3.5 w-3.5" />
+                </span>
+                <span>{t}</span>
               </li>
             ))}
           </ul>
@@ -456,22 +472,24 @@ function Skills() {
         title="My technical toolkit"
         description="A blend of frontend craft, solid backend engineering, and the tools that keep teams shipping."
       />
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {SKILL_GROUPS.map((g) => (
           <div
             key={g.title}
-            className="group relative overflow-hidden rounded-3xl glass p-6 transition-all hover:-translate-y-1 hover:bg-white/10"
+            className="group relative overflow-hidden rounded-3xl glass p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/20 hover:shadow-xl"
           >
-            <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-[var(--gradient-primary)] opacity-0 blur-2xl transition-opacity group-hover:opacity-30" />
-            <div className="grid h-11 w-11 place-items-center rounded-xl bg-[var(--gradient-primary)] text-primary-foreground">
-              <g.icon className="h-5 w-5" />
+            <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary-gradient opacity-0 blur-2xl transition-opacity group-hover:opacity-20 pointer-events-none" />
+            <div className="flex items-center gap-3">
+              <div className="grid h-10 w-10 place-items-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary-gradient group-hover:text-primary-foreground">
+                <g.icon className="h-5 w-5" />
+              </div>
+              <h3 className="font-display text-base font-bold text-foreground">{g.title}</h3>
             </div>
-            <h3 className="mt-4 font-display text-lg font-semibold">{g.title}</h3>
-            <ul className="mt-4 flex flex-wrap gap-2">
+            <ul className="mt-5 flex flex-wrap gap-1.5">
               {g.items.map((i) => (
                 <li
                   key={i}
-                  className="rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs text-muted-foreground"
+                  className="rounded-full border border-black/5 bg-black/[0.02] px-3 py-1 text-xs font-medium text-muted-foreground transition-all hover:border-primary/20 hover:bg-white hover:text-primary hover:shadow-sm"
                 >
                   {i}
                 </li>
@@ -494,6 +512,7 @@ const EXPERIENCE = [
       "Built and integrated RESTful APIs and optimized MongoDB queries for faster response times.",
       "Collaborated with the team on code reviews, debugging, and improving overall app performance.",
     ],
+    tags: ["React.js", "Node.js", "Express.js", "MongoDB", "REST APIs", "CRUD Operations", "Git"],
   },
   {
     role: "MERN Stack Developer — Intern",
@@ -504,6 +523,7 @@ const EXPERIENCE = [
       "Implemented CRUD operations and connected the frontend to Node.js + Express APIs.",
       "Learned deployment workflows on AWS EC2 and Azure under senior guidance.",
     ],
+    tags: ["React.js", "Bootstrap", "HTML", "CSS", "REST APIs", "AWS EC2", "Azure"],
   },
 ];
 
@@ -512,27 +532,50 @@ function Experience() {
     <Section id="experience">
       <SectionTitle eyebrow="Experience" title="Where I've worked" />
       <div className="relative">
-        <div className="absolute left-3 top-2 bottom-2 w-px bg-gradient-to-b from-primary/60 via-accent/40 to-transparent sm:left-4" />
-        <ol className="space-y-6">
+        <div className="absolute left-[11px] top-3 bottom-3 w-0.5 bg-gradient-to-b from-primary via-accent/50 to-transparent sm:left-[15px]" />
+        <ol className="space-y-8">
           {EXPERIENCE.map((x) => (
-            <li key={x.role} className="relative pl-10 sm:pl-14">
-              <span className="absolute left-0 top-6 grid h-6 w-6 place-items-center rounded-full bg-[var(--gradient-primary)] sm:left-1 sm:h-7 sm:w-7">
-                <Briefcase className="h-3 w-3 text-primary-foreground sm:h-3.5 sm:w-3.5" />
+            <li key={x.role} className="relative pl-10 sm:pl-16">
+              <span className="absolute left-0 top-5 flex h-6 w-6 items-center justify-center rounded-full bg-white border-2 border-primary text-primary shadow-sm sm:left-1 sm:h-7 sm:w-7">
+                <Briefcase className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
               </span>
-              <div className="glass rounded-2xl p-6">
-                <div className="flex flex-wrap items-baseline justify-between gap-2">
-                  <h3 className="font-display text-lg font-semibold">{x.role}</h3>
-                  <span className="text-xs text-muted-foreground">{x.period}</span>
+              <div className="glass rounded-3xl p-6 md:p-8 hover:shadow-xl hover:border-primary/20 transition-all duration-300 border-l-4 border-l-primary relative overflow-hidden group">
+                <div className="absolute top-0 right-0 h-32 w-32 rounded-full bg-primary-gradient opacity-0 blur-3xl transition-opacity group-hover:opacity-10 pointer-events-none" />
+                <div className="flex flex-wrap items-start justify-between gap-4">
+                  <div>
+                    <h3 className="font-display text-xl font-bold tracking-tight text-foreground">{x.role}</h3>
+                    <p className="mt-1 text-sm font-medium text-primary flex items-center gap-1.5">
+                      <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                      {x.company}
+                    </p>
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1 text-xs font-medium text-muted-foreground">
+                    <Calendar className="h-3 w-3" />
+                    {x.period}
+                  </div>
                 </div>
-                <p className="mt-1 text-sm text-primary">{x.company}</p>
-                <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+                <ul className="mt-5 space-y-3 text-sm leading-relaxed text-muted-foreground">
                   {x.points.map((p) => (
-                    <li key={p} className="flex gap-2">
-                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
-                      {p}
+                    <li key={p} className="flex items-start gap-3">
+                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                        <Check className="h-3 w-3" />
+                      </span>
+                      <span>{p}</span>
                     </li>
                   ))}
                 </ul>
+                {x.tags && (
+                  <div className="mt-6 flex flex-wrap gap-1.5 border-t border-black/5 pt-4">
+                    {x.tags.map((t) => (
+                      <span
+                        key={t}
+                        className="rounded-full border border-black/5 bg-black/[0.03] px-2.5 py-0.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/30 hover:text-primary"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             </li>
           ))}
@@ -577,40 +620,56 @@ function Projects() {
         title="Selected work"
         description="A few things I've built recently. Each one taught me something new about product, performance, or polish."
       />
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {PROJECTS.map((p) => (
           <article
             key={p.title}
-            className="group relative overflow-hidden rounded-3xl glass p-7 transition-all hover:-translate-y-1"
+            className="group relative overflow-hidden rounded-3xl glass p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/20 hover:shadow-xl flex flex-col justify-between"
           >
-            <div className="absolute inset-x-0 -top-1 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-            <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[var(--gradient-primary)] opacity-10 blur-2xl transition-opacity group-hover:opacity-30" />
-
-            <div className="flex items-start justify-between gap-4">
-              <h3 className="font-display text-xl font-semibold">{p.title}</h3>
-              <div className="flex shrink-0 gap-1.5">
-                <a
-                  href={p.github}
-                  aria-label="GitHub repo"
-                  className="grid h-9 w-9 place-items-center rounded-full bg-white/5 transition-colors hover:bg-white/10"
-                >
-                  <Github className="h-4 w-4" />
-                </a>
-                <a
-                  href={p.demo}
-                  aria-label="Live demo"
-                  className="grid h-9 w-9 place-items-center rounded-full bg-white/5 transition-colors hover:bg-white/10"
-                >
-                  <ExternalLink className="h-4 w-4" />
-                </a>
+            <div>
+              <div className="flex items-start justify-between gap-4">
+                <h3 className="font-display text-lg font-bold text-foreground group-hover:text-primary transition-colors">{p.title}</h3>
+                <div className="flex shrink-0 gap-1.5">
+                  <a
+                    href={p.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="GitHub repo"
+                    className="grid h-8.5 w-8.5 place-items-center rounded-full bg-black/5 text-muted-foreground transition-all hover:bg-primary hover:text-primary-foreground"
+                  >
+                    <Github className="h-4 w-4" />
+                  </a>
+                  <a
+                    href={p.demo}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="Live demo"
+                    className="grid h-8.5 w-8.5 place-items-center rounded-full bg-black/5 text-muted-foreground transition-all hover:bg-primary hover:text-primary-foreground"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
+                </div>
               </div>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.description}</p>
+              {p.demo && p.demo !== "#" && (
+                <div className="mt-3 flex">
+                  <a
+                    href={p.demo}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline hover:text-primary/80 transition-all"
+                  >
+                    <ExternalLink className="h-3.5 w-3.5" />
+                    {p.demo.replace(/^https?:\/\/(www\.)?/, "")}
+                  </a>
+                </div>
+              )}
             </div>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.description}</p>
-            <div className="mt-5 flex flex-wrap gap-2">
+            <div className="mt-6 flex flex-wrap gap-1.5 border-t border-black/5 pt-4">
               {p.tags.map((t) => (
                 <span
                   key={t}
-                  className="rounded-full border border-primary/20 bg-primary/10 px-2.5 py-1 text-xs text-primary"
+                  className="rounded-full border border-primary/10 bg-primary/5 px-2.5 py-0.5 text-xs font-semibold text-primary"
                 >
                   {t}
                 </span>
@@ -638,13 +697,13 @@ function Certifications() {
         {CERTS.map((c) => (
           <div
             key={c.title}
-            className="flex items-start gap-4 rounded-2xl glass p-5 transition-all hover:-translate-y-0.5 hover:bg-white/10"
+            className="flex items-start gap-4 rounded-2xl glass p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/20 hover:shadow-lg group"
           >
-            <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-[var(--gradient-primary)] text-primary-foreground">
+            <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary-gradient group-hover:text-primary-foreground">
               <Award className="h-5 w-5" />
             </div>
             <div className="min-w-0">
-              <h3 className="font-medium leading-snug">{c.title}</h3>
+              <h3 className="font-semibold leading-snug text-foreground transition-colors group-hover:text-primary">{c.title}</h3>
               <p className="mt-0.5 text-sm text-muted-foreground">
                 {c.org}{c.year ? ` · ${c.year}` : ""}
               </p>
@@ -671,14 +730,19 @@ function Education() {
       <SectionTitle eyebrow="Education" title="Academic background" />
       <div className="grid gap-5 md:grid-cols-2">
         {EDUCATION.map((e) => (
-          <div key={e.degree} className="glass rounded-3xl p-7">
-            <div className="grid h-11 w-11 place-items-center rounded-xl bg-[var(--gradient-primary)] text-primary-foreground">
-              <GraduationCap className="h-5 w-5" />
+          <div key={e.degree} className="glass rounded-3xl p-6 md:p-8 transition-all duration-300 hover:border-primary/20 hover:shadow-xl group border-l-4 border-l-primary relative overflow-hidden">
+            <div className="absolute top-0 right-0 h-32 w-32 rounded-full bg-primary-gradient opacity-0 blur-3xl transition-opacity group-hover:opacity-10 pointer-events-none" />
+            <div className="flex items-start gap-4">
+              <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary-gradient group-hover:text-primary-foreground">
+                <GraduationCap className="h-5 w-5" />
+              </div>
+              <div className="min-w-0">
+                <h3 className="font-display text-lg font-bold text-foreground transition-colors group-hover:text-primary">{e.degree}</h3>
+                <p className="mt-1 text-sm font-semibold text-primary">{e.school}</p>
+                <p className="mt-0.5 text-xs text-muted-foreground">{e.period}</p>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{e.detail}</p>
+              </div>
             </div>
-            <h3 className="mt-4 font-display text-lg font-semibold">{e.degree}</h3>
-            <p className="mt-1 text-sm text-primary">{e.school}</p>
-            <p className="mt-1 text-xs text-muted-foreground">{e.period}</p>
-            <p className="mt-3 text-sm text-muted-foreground">{e.detail}</p>
           </div>
         ))}
       </div>
@@ -689,25 +753,25 @@ function Education() {
 function Contact() {
   return (
     <Section id="contact">
-      <div className="relative overflow-hidden rounded-[2rem] glass-strong p-10 sm:p-14">
-        <div className="absolute -top-24 left-1/2 h-64 w-[40rem] -translate-x-1/2 rounded-full bg-[var(--gradient-primary)] opacity-30 blur-3xl" />
+      <div className="relative overflow-hidden rounded-[2rem] glass-strong p-6 sm:p-10 md:p-14 border border-black/5 shadow-xl">
+        <div className="absolute -top-24 left-1/2 h-64 w-[40rem] -translate-x-1/2 rounded-full bg-primary-gradient opacity-20 blur-3xl" />
         <div className="relative grid gap-10 lg:grid-cols-2 lg:items-center">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full glass px-3 py-1 text-xs uppercase tracking-[0.18em] text-muted-foreground">
+            <div className="inline-flex items-center gap-2 rounded-full bg-black/5 px-3 py-1 text-xs uppercase tracking-[0.18em] text-muted-foreground">
               <Sparkles className="h-3 w-3 text-primary" />
               Contact
             </div>
             <h2 className="mt-4 font-display text-4xl font-bold sm:text-5xl">
               Let's build something <span className="gradient-text">remarkable</span>.
             </h2>
-            <p className="mt-4 max-w-md text-muted-foreground">
+            <p className="mt-4 max-w-md text-muted-foreground leading-relaxed">
               I'm open to full-time roles, freelance projects, and meaningful collaborations.
               Drop a message — I usually reply within 24 hours.
             </p>
-            <div className="mt-6 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href={`mailto:${SOCIALS.email}`}
-                className="group inline-flex items-center gap-2 rounded-full bg-[var(--gradient-primary)] px-5 py-3 text-sm font-medium text-primary-foreground transition-all hover:shadow-[var(--shadow-glow)]"
+                className="group inline-flex items-center gap-2.5 rounded-full bg-primary-gradient px-6 py-3.5 text-sm font-medium text-primary-foreground transition-all hover:shadow-[var(--shadow-glow)]"
               >
                 <Mail className="h-4 w-4" />
                 Send an email
@@ -717,7 +781,7 @@ function Contact() {
                 href={SOCIALS.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full glass px-5 py-3 text-sm font-medium transition-colors hover:bg-white/10"
+                className="inline-flex items-center gap-2.5 rounded-full glass px-6 py-3.5 text-sm font-medium transition-all hover:bg-black/5"
               >
                 <Linkedin className="h-4 w-4" />
                 Connect on LinkedIn
@@ -750,17 +814,17 @@ function ContactCard({
 }) {
   const Inner = (
     <>
-      <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/5">
-        <Icon className="h-4 w-4 text-primary" />
+      <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary-gradient group-hover:text-primary-foreground">
+        <Icon className="h-4.5 w-4.5" />
       </div>
       <div className="min-w-0">
-        <div className="text-xs uppercase tracking-wider text-muted-foreground">{label}</div>
-        <div className="truncate text-sm font-medium">{value}</div>
+        <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{label}</div>
+        <div className="truncate text-sm font-semibold text-foreground group-hover:text-primary transition-colors">{value}</div>
       </div>
     </>
   );
   const cls =
-    "flex items-center gap-3 rounded-2xl glass p-4 transition-all hover:-translate-y-0.5 hover:bg-white/10";
+    "flex items-center gap-3 rounded-2xl glass p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/20 hover:shadow-md group";
   return href ? (
     <a href={href} className={cls} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
       {Inner}
@@ -772,7 +836,7 @@ function ContactCard({
 
 function Footer() {
   return (
-    <footer className="border-t border-white/5 py-8">
+    <footer className="border-t border-black/5 py-8">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 text-xs text-muted-foreground sm:flex-row sm:px-8">
         <p>© {new Date().getFullYear()} Srividya Kambhampati. Crafted with care.</p>
         <div className="flex items-center gap-3">

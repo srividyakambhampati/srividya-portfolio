@@ -68,36 +68,35 @@
 
 :root {
   --radius: 0.875rem;
-  /* Premium dark — midnight ocean with teal → sky → mint accents */
-  --background: oklch(0.17 0.03 230);
-  --foreground: oklch(0.97 0.01 220);
-  --card: oklch(0.22 0.035 230);
-  --card-foreground: oklch(0.97 0.01 220);
-  --popover: oklch(0.22 0.035 230);
-  --popover-foreground: oklch(0.97 0.01 220);
-  --primary: oklch(0.78 0.14 200);
-  --primary-foreground: oklch(0.17 0.03 230);
-  --secondary: oklch(0.27 0.04 230);
-  --secondary-foreground: oklch(0.97 0.01 220);
-  --muted: oklch(0.25 0.035 230);
-  --muted-foreground: oklch(0.78 0.02 220);
-  --accent: oklch(0.84 0.13 165);
-  --accent-foreground: oklch(0.17 0.03 230);
+  /* Pure White Theme */
+  --background: #ffffff;
+  --foreground: oklch(0.20 0.02 240);
+  --card: oklch(0.98 0.01 240);
+  --card-foreground: oklch(0.20 0.02 240);
+  --popover: #ffffff;
+  --popover-foreground: oklch(0.20 0.02 240);
+  --primary: oklch(0.50 0.18 245); /* Rich premium Indigo/Blue */
+  --primary-foreground: #ffffff;
+  --secondary: oklch(0.96 0.01 240);
+  --secondary-foreground: oklch(0.20 0.02 240);
+  --muted: oklch(0.96 0.01 240);
+  --muted-foreground: oklch(0.45 0.03 240);
+  --accent: oklch(0.55 0.16 160); /* Deep mint/teal */
+  --accent-foreground: #ffffff;
   --destructive: oklch(0.65 0.22 25);
   --destructive-foreground: oklch(0.97 0.01 220);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.78 0.14 200);
+  --border: oklch(0.20 0.02 240 / 8%);
+  --input: oklch(0.20 0.02 240 / 8%);
+  --ring: oklch(0.50 0.18 245);
 
-  --gradient-primary: linear-gradient(135deg, oklch(0.65 0.16 240), oklch(0.78 0.14 200), oklch(0.84 0.13 165));
-  --gradient-mesh: radial-gradient(circle at 18% 20%, oklch(0.65 0.16 240 / 0.28), transparent 55%),
-                   radial-gradient(circle at 82% 28%, oklch(0.78 0.14 200 / 0.22), transparent 55%),
-                   radial-gradient(circle at 50% 92%, oklch(0.84 0.13 165 / 0.18), transparent 60%);
-  --shadow-glow: 0 0 60px -10px oklch(0.78 0.14 200 / 0.55);
-  --shadow-card: 0 20px 60px -20px oklch(0 0 0 / 0.55);
+  --gradient-primary: linear-gradient(135deg, oklch(0.50 0.18 245), oklch(0.55 0.16 160));
+  --gradient-mesh: radial-gradient(circle at 18% 20%, oklch(0.50 0.18 245 / 0.07), transparent 55%),
+                   radial-gradient(circle at 82% 28%, oklch(0.55 0.16 160 / 0.05), transparent 55%);
+  --shadow-glow: 0 0 50px -10px oklch(0.50 0.18 245 / 0.25);
+  --shadow-card: 0 20px 50px -20px oklch(0.20 0.02 240 / 0.08);
 }
 
-.dark { color-scheme: dark; }
+.dark { color-scheme: light; }
 
 @layer base {
   * { border-color: var(--color-border); }
@@ -108,35 +107,37 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
-    background-image: var(--gradient-mesh);
-    background-attachment: fixed;
     -webkit-font-smoothing: antialiased;
   }
 
   h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
 
-  ::selection { background: oklch(0.78 0.14 200 / 0.4); }
+  ::selection { background: oklch(0.50 0.18 245 / 0.2); }
 
   /* Custom scrollbar */
   ::-webkit-scrollbar { width: 10px; height: 10px; }
-  ::-webkit-scrollbar-track { background: oklch(0.17 0.03 230); }
+  ::-webkit-scrollbar-track { background: #ffffff; }
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, oklch(0.65 0.16 240), oklch(0.84 0.13 165));
+    background: linear-gradient(180deg, oklch(0.50 0.18 245), oklch(0.55 0.16 160));
     border-radius: 999px;
   }
 }
 
 @utility glass {
-  background: oklch(1 0 0 / 0.04);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px) saturate(160%);
-  border: 1px solid oklch(1 0 0 / 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: var(--shadow-card);
 }
 
 @utility glass-strong {
-  background: oklch(1 0 0 / 0.07);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid oklch(1 0 0 / 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+@utility bg-primary-gradient {
+  background: var(--gradient-primary);
 }
 
 @utility gradient-text {

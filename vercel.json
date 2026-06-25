@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "srividya-portfolio-export/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "srividya-portfolio-export/dist"
+      }
+    }
+  ]
+}
